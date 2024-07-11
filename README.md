@@ -1,1 +1,1 @@
-# MAZE rebuildのバックエンドリポジトリ
+# MAZE rebuildのフロントエンドリポジトリ
