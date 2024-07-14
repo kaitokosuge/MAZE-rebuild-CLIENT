@@ -8,6 +8,7 @@ export default function UserAuthForm() {
                 <input id="email" type="email" />
                 <button>login</button>
             </form>
+            <button>github login</button>
         </div>
     );
 }
