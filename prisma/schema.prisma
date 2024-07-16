@@ -15,7 +15,7 @@ model Account {
   providerAccountId  String
   refresh_token       String? @db.Text
   access_token        String? @db.Text
-  expires_at         Int
+  expires_at         Int?
   token_type         String?
   scope              String?
   id_token           String? @db.Text
@@ -25,7 +25,7 @@ model Account {
   user               User      @relation(fields: [userId], references: [id],onDelete:Cascade)
 
   @@unique([provider, providerAccountId])
-  @@map (name:"accounts")
+  @@map(name:"accounts")
 }
 
 model Session {
@@ -58,6 +58,5 @@ model VerificationRequest {
   expires    DateTime
 
   @@unique([identifier, token])
-  @@map (name:"verification_tokens")
+  @@map(name:"verification_tokens")
 }
-

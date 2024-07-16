@@ -5,9 +5,9 @@ import { NextResponse } from "next/server";
 export default withAuth(
     async function middleware(req) {
         const token = await getToken({ req });
-        console.log(typeof token?.role);
-        const isAuth = !!token;
 
+        const isAuth = !!token;
+        console.log("token", token);
         //ログイン・新規登録ページかどうか
         const isAuthPage =
             req.nextUrl.pathname.startsWith("/login") ||
@@ -27,11 +27,7 @@ export default withAuth(
     },
     {
         callbacks: {
-            async authorized({ req, token }) {
-                // if (token?.role === 1) {
-                //     // return true;
-                //     return NextResponse.redirect(new URL("/null", req.url));
-                // }
+            async authorized() {
                 return true;
             },
         },
