@@ -1,4 +1,10 @@
 import React from "react";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function page() {
     return (
@@ -10,6 +16,14 @@ export default function page() {
                     <h2 className="border-b border-[#292b3a] pb-1 text-xl">
                         07/18 Today's Question
                     </h2>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>Hover</TooltipTrigger>
+                            <TooltipContent>
+                                <p>Add to library</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                     <div className="mt-5 flex justify-between rounded-md bg-[#252525] p-1">
                         <div className="category relative flex w-[50%] overflow-scroll">
                             <div className="relative flex min-w-[120px] items-center rounded-md border border-[#293049] bg-[#11111e] px-5 py-[6px] text-center text-[11px]">
