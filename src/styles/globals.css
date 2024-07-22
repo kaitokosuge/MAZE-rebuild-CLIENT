@@ -2,47 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.maze-font {
-    font-family:
-        Russo One,
-        sans-serif;
-}
-
-.maze-subfont {
-    font-family: "Space Mono", monospace, sans-serif;
-}
-
-.text-shadow-correct {
-    text-shadow: 1px 1px 2px rgb(48, 142, 73);
-}
-
-.bg-maze-btn-right {
-    background: linear-gradient(to left, #293049, #4b4f58, #293049);
-}
-.bg-maze-btn-right-sec {
-    background: linear-gradient(to left, #36394a, #515356, #36394a);
-}
-.bg-maze-btn-right-white {
-    background: linear-gradient(to left, #3a3a3a, #929292, #3a3a3a);
-}
-.bg-maze-btn-right-white-vertical {
-    background: linear-gradient(to top, #373c4f, #a6a6a6, #293049);
-}
-.bg-shadow-toright {
-    background: linear-gradient(to right, #14172504, #141725);
-}
-.bg-top {
-    background: linear-gradient(
-        20deg,
-        #141414,
-        #141414,
-        #141414,
-        #141414,
-        #141414,
-        #404040
-    );
-}
-
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -98,4 +57,21 @@
         --chart-4: 280 65% 60%;
         --chart-5: 340 75% 55%;
     }
+}
+
+.maze-font {
+    font-family:
+        Russo One,
+        sans-serif;
+}
+
+.maze-subfont {
+    font-family: "Space Mono", monospace, sans-serif;
+}
+
+.border-maze-right {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+.text-maze-right {
+    color: #000238;
 }
