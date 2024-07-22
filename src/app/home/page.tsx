@@ -1,3 +1,4 @@
+import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import React from "react";
 
@@ -6,7 +7,7 @@ export default function page() {
         <main className="maze-subfont">
             <div className="flex">
                 <Sidebar />
-                <p>hello!p</p>
+                <Header />
             </div>
         </main>
     );
