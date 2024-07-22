@@ -54,7 +54,7 @@ export default function Sidebar() {
                     href="/profile"
                     className="relative mt-[10px] flex items-center whitespace-nowrap rounded-[5px] bg-white p-1 duration-300 hover:bg-gray-100"
                 >
-                    {/* <span className="h-[40px] w-[40px] bg-black"></span> */}
+                    {/* <div className="h-[34px] w-[34px] bg-black"></div> */}
                     <img src="./app-icons/home.svg" className="" />
                     <p className="text-maze-right ml-[25px] overflow-scroll font-bold">
                         kaitokosuge
@@ -91,13 +91,21 @@ export default function Sidebar() {
                     </div>
                 </div>
                 {isOpenLevel && (
-                    <div className="relative -z-20 flex w-full duration-500">
+                    <div className="relative -z-20 w-full duration-500">
                         <Link
                             href="/tech/typescript"
                             className="flex w-full items-center whitespace-nowrap rounded-[5px] bg-white px-[15px] py-[12px] duration-300 hover:bg-gray-100"
                         >
-                            <p className="text-maze-right text-[14px] font-bold">
+                            <p className="text-maze-right ml-[10px] text-[14px] font-bold">
                                 初級
+                            </p>
+                        </Link>
+                        <Link
+                            href="/tech/typescript"
+                            className="flex w-full items-center whitespace-nowrap rounded-[5px] bg-white px-[15px] py-[12px] duration-300 hover:bg-gray-100"
+                        >
+                            <p className="text-maze-right ml-[10px] text-[14px] font-bold">
+                                中級
                             </p>
                         </Link>
                     </div>
@@ -131,7 +139,7 @@ export default function Sidebar() {
                         >
                             <img
                                 src="./tech-icons/typescript.svg"
-                                className="w-[20px]"
+                                className="ml-[10px] w-[20px]"
                             />
                             <p className="text-maze-right ml-[10px] text-[14px] font-bold">
                                 TypeScript
