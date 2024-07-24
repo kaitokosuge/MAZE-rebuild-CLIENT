@@ -32,13 +32,13 @@ export default function Sidebar() {
         <div
             onMouseEnter={handleMouseHover}
             onMouseLeave={handleMouseLeave}
-            className="h-screen w-[65px]"
+            className="min-h-screen min-w-[65px]"
         >
             <div
                 className={
                     isHover
-                        ? "border-maze-right fixed z-20 h-screen w-[220px] overflow-scroll border-r bg-white px-[12px] pb-20 duration-300"
-                        : "border-maze-right fixed z-20 h-screen w-[65px] overflow-hidden border-r bg-white px-[12px] duration-300"
+                        ? "border-maze-right fixed top-0 z-20 h-screen w-[220px] overflow-scroll border-r bg-white px-[12px] pb-20 duration-300"
+                        : "border-maze-right fixed top-0 z-20 h-screen w-[65px] overflow-hidden border-r bg-white px-[12px] duration-300"
                 }
             >
                 <Link
@@ -55,7 +55,7 @@ export default function Sidebar() {
                     className="relative mt-[10px] flex items-center whitespace-nowrap rounded-[5px] bg-white p-1 duration-300 hover:bg-gray-100"
                 >
                     {/* <div className="h-[34px] w-[34px] bg-black"></div> */}
-                    <img src="./app-icons/home.svg" className="" />
+                    <img src="./app-icons/profileicon.svg" className="" />
                     <p className="text-maze-right ml-[25px] overflow-scroll font-bold">
                         kaitokosuge
                     </p>

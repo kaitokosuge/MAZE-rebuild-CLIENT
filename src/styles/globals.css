@@ -72,6 +72,9 @@
 .border-maze-right {
     border-color: rgba(0, 0, 0, 0.1);
 }
+.bg-admin-date-shadow {
+    background: linear-gradient(to top, rgb(255, 255, 255), rgba(0, 0, 0, 0));
+}
 .text-maze-right {
     color: #000238;
 }
