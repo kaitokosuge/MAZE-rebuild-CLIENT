@@ -26,7 +26,7 @@ export default function RootLayout({
                 ></link>
             </head>
             <body>
-                <div className="flex justify-between">
+                <div className="flex justify-between overflow-hidden">
                     <Sidebar />
                     {children}
                 </div>

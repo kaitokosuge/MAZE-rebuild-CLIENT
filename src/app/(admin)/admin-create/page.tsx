@@ -1,11 +1,7 @@
+import Link from "next/link";
 import React from "react";
+import Suchedule from "./Suchedule";
 
 export default function Page() {
-    return (
-        <section className="flex">
-            <div>
-                <div></div>
-            </div>
-        </section>
-    );
+    return <Suchedule />;
 }
