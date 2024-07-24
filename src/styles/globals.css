@@ -58,7 +58,14 @@
         --chart-5: 340 75% 55%;
     }
 }
-
+.ce-toolbar__content {
+    max-width: 800px;
+    width: 80%;
+}
+.ce-block__content {
+    max-width: 800px;
+    width: 80%;
+}
 .maze-font {
     font-family:
         Russo One,

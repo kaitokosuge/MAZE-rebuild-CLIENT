@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import TabQuizForm from "../(tab-content)/TabQuizForm";
+import EditorJS from "@editorjs/editorjs";
 
 export default function Tab() {
     const [viewContent, setViewContent] = useState<string | null>(null);
@@ -11,7 +12,8 @@ export default function Tab() {
         setViewContent(e.currentTarget.id);
         console.log(e.currentTarget.id);
     };
-    const [form, setForm] = useState("");
+    const [form, setForm] = useState<string>("{}");
+    console.log("top form", form);
     return (
         <div>
             <div className="border-maze-right flex h-[63px] items-center justify-between border-b border-t px-5 py-[10px] pr-20">
