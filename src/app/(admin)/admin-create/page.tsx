@@ -1,7 +1,12 @@
-import Link from "next/link";
 import React from "react";
 import Suchedule from "./Suchedule";
+import Tab from "./Tab";
 
 export default function Page() {
-    return <Suchedule />;
+    return (
+        <main>
+            <Suchedule />
+            <Tab />
+        </main>
+    );
 }
