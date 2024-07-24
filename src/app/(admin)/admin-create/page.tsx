@@ -4,7 +4,7 @@ import Tab from "./(tab-modules)/(tab-menu)/Tab";
 
 export default function Page() {
     return (
-        <main>
+        <main className="">
             <Suchedule />
             <Tab />
         </main>

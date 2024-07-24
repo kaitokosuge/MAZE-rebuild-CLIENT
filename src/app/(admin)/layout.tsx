@@ -11,10 +11,5 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    return (
-        <div className="maze-subfont w-full">
-            <AdminHeader />
-            {children}
-        </div>
-    );
+    return <div className="maze-subfont w-full">{children}</div>;
 }
