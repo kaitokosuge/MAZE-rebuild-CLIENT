@@ -55,7 +55,7 @@ export default function Sidebar() {
                     className="relative mt-[10px] flex items-center whitespace-nowrap rounded-[5px] bg-white p-1 duration-300 hover:bg-gray-100"
                 >
                     {/* <div className="h-[34px] w-[34px] bg-black"></div> */}
-                    <img src="./app-icons/home.svg" className="" />
+                    <img src="./app-icons/profileicon.svg" className="" />
                     <p className="text-maze-right ml-[25px] overflow-scroll font-bold">
                         kaitokosuge
                     </p>
