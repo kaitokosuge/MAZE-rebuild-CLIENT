@@ -32,13 +32,13 @@ export default function Sidebar() {
         <div
             onMouseEnter={handleMouseHover}
             onMouseLeave={handleMouseLeave}
-            className="h-screen w-[65px]"
+            className="min-h-screen min-w-[65px]"
         >
             <div
                 className={
                     isHover
-                        ? "border-maze-right fixed z-20 h-screen w-[220px] overflow-scroll border-r bg-white px-[12px] pb-20 duration-300"
-                        : "border-maze-right fixed z-20 h-screen w-[65px] overflow-hidden border-r bg-white px-[12px] duration-300"
+                        ? "border-maze-right fixed top-0 z-20 h-screen w-[220px] overflow-scroll border-r bg-white px-[12px] pb-20 duration-300"
+                        : "border-maze-right fixed top-0 z-20 h-screen w-[65px] overflow-hidden border-r bg-white px-[12px] duration-300"
                 }
             >
                 <Link

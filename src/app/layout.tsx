@@ -4,7 +4,6 @@ export const metadata = {
 };
 import Sidebar from "@/components/Sidebar/Sidebar";
 import ".././styles/globals.css";
-import Header from "@/components/Header/Header";
 
 export default function RootLayout({
     children,
@@ -27,12 +26,9 @@ export default function RootLayout({
                 ></link>
             </head>
             <body>
-                <div className="flex">
+                <div className="flex justify-between">
                     <Sidebar />
-                    <div className="w-full">
-                        <Header />
-                        {children}
-                    </div>
+                    {children}
                 </div>
             </body>
         </html>
