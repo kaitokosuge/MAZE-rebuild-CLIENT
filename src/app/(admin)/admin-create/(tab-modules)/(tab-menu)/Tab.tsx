@@ -9,10 +9,10 @@ export default function Tab() {
     ) => {
         e.preventDefault();
         setViewContent(e.currentTarget.id);
-        console.log(e.currentTarget.id);
     };
     const [form, setForm] = useState<string>("{}");
     console.log("top form", form);
+
     return (
         <div className="-ml-5">
             <div className="border-maze-right flex h-[50px] items-center justify-between border-b px-10 py-[10px] pr-20">
