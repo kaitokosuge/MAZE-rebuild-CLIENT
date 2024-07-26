@@ -58,6 +58,19 @@
         --chart-5: 340 75% 55%;
     }
 }
+/* アクセシビリティ考慮 */
+.visually-hidden {
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    margin: -1px;
+}
 .ce-toolbar__content {
     max-width: 800px;
     width: 80%;
