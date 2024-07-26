@@ -1,10 +1,10 @@
 import React from "react";
 import Suchedule from "./Suchedule";
-import Tab from "./(tab-modules)/(tab-menu)/Tab";
+import Tab from "./(tab-modules)/Tab";
 
 export default function Page() {
     return (
-        <main>
+        <main className="">
             <Suchedule />
             <Tab />
         </main>
