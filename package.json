@@ -17,6 +17,7 @@
         "@prisma/client": "^5.16.2",
         "@radix-ui/react-tooltip": "^1.1.2",
         "@tanstack/react-query": "^5.51.23",
+        "@types/axios": "^0.14.0",
         "@types/editorjs__header": "^2.6.3",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",

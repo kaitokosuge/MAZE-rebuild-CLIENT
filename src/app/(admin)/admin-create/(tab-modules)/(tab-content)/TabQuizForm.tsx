@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
+import axios from "axios";
+
 import Header from "@editorjs/header";
 import CodeTool from "@editorjs/code";
 import {
@@ -77,16 +79,25 @@ export default function TabQuizForm({
     }, []);
 
     const onSubmit = async (quizData: adminTodayQuizSchemeType) => {
-        console.log(quizData);
         const quizObj: EditorJS = JSON.parse(quizText);
         const saveQuizBlock = JSON.stringify(quizObj.blocks);
 
         const validateMessage = validateQuizText(saveQuizBlock);
-        if (validateMessage === "入力してください") {
-            alert("入力してください");
-        } else if (validateMessage === "文字数が超過しています") {
-            alert("文字数が超過しています");
+        if (validateMessage) {
+            alert(`${validateMessage}`);
+            return;
         }
+        const sendData = {
+            text: saveQuizBlock,
+            techCategory: quizData.techCategory,
+            otherCategory: quizData.otherCategory,
+            level: quizData.level,
+        };
+        const res = await axios.post(
+            "http://localhost:3001/post/admin-quiz",
+            sendData,
+        );
+        console.log("res", res);
     };
 
     return (
