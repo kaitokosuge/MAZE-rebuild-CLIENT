@@ -14,6 +14,7 @@ export default function UserAuthForm() {
             </form>
             {isGoogleLoading ? <>loading</> : <>github</>}
             <button
+                className="text-4xl"
                 onClick={() => {
                     setIsGoogleLoading(true);
                     signIn("google");
@@ -23,6 +24,7 @@ export default function UserAuthForm() {
             </button>
             {isGitHubLoading ? <>loading</> : <>github</>}
             <button
+                className="text-4xl"
                 onClick={() => {
                     setIsGitHubLoading(true);
                     signIn("github");

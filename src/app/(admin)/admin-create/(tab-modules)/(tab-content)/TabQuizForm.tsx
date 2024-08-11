@@ -1,47 +1,68 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
+
 import axios from "axios";
 
 import Header from "@editorjs/header";
 import CodeTool from "@editorjs/code";
 import {
+    Control,
+    Controller,
     FieldErrors,
+    useFieldArray,
     UseFormHandleSubmit,
     UseFormRegister,
+    UseFormReset,
 } from "react-hook-form";
 import { adminTodayQuizSchemeType } from "@/app/validations/AdminTodayQuiz";
 import { validateQuizText } from "@/app/validations/CommonQuizText";
-import { dummyOtherCetegory, dummyTechCategory } from "@/dummy/category";
+import {
+    dummyDate,
+    dummyOtherCetegory,
+    dummyTechCategory,
+} from "@/dummy/category";
+import { useSession } from "next-auth/react";
 
 export default function TabQuizForm({
+    control,
     register,
     handleSubmit,
     errors,
     quizText,
     setQuizText,
+    reset,
 }: {
+    control: Control<
+        {
+            level: string;
+            choices: { text: string; isTrue: boolean }[];
+            showDay: string;
+            techCategory: string[];
+            otherCategory?: string[] | undefined;
+        },
+        any
+    >;
     register: UseFormRegister<{
-        // text: string;
-        // choices: {
-        //     choiceText: string;
-        //     isTrue: boolean;
-        // }[];
-        // showDay: string;
+        choices: {
+            text: string;
+            isTrue: boolean;
+        }[];
+        showDay: string;
         techCategory: string[];
-        // userId: number;
+
         level: string;
         otherCategory?: string[] | undefined;
     }>;
     handleSubmit: UseFormHandleSubmit<
         {
-            // text: string;
-            // choices: {
-            //     choiceText: string;
-            //     isTrue: boolean;
-            // }[];
-            // showDay: string;
+            choices: {
+                text: string;
+                isTrue: boolean;
+            }[];
+            showDay: string;
             techCategory: string[];
-            // userId: number;
+
             level: string;
             otherCategory?: string[] | undefined;
         },
@@ -49,13 +70,38 @@ export default function TabQuizForm({
     >;
     errors: FieldErrors<{
         level: string;
+        choices: {
+            text: string;
+            isTrue: boolean;
+        }[];
+        showDay: string;
+        techCategory: string[];
+        otherCategory?: string[] | undefined;
     }>;
     quizText: string;
     setQuizText: (value: string) => void;
+    reset: UseFormReset<{
+        level: string;
+        choices: {
+            text: string;
+            isTrue: boolean;
+        }[];
+        showDay: string;
+        techCategory: string[];
+        otherCategory?: string[] | undefined;
+    }>;
 }) {
-    const initializeEditer = async () => {
+    const { data } = useSession();
+    console.log("user name", data?.user.name);
+
+    const ref = useRef<EditorJS>();
+    const [isMounted, setIsMounted] = useState<boolean>(false);
+    const initializeEditer = useCallback(async () => {
         const editor: EditorJS = new EditorJS({
             holder: "editor",
+            onReady() {
+                ref.current = editor;
+            },
             placeholder: "クイズ本文",
             inlineToolbar: true,
             tools: {
@@ -65,7 +111,7 @@ export default function TabQuizForm({
             onChange: () => handleQuizText(editor),
             data: JSON.parse(quizText),
         });
-    };
+    }, []);
 
     const handleQuizText = (editor: any) => {
         editor.save().then((outputData: EditorJS) => {
@@ -73,12 +119,29 @@ export default function TabQuizForm({
             setQuizText(strData);
         });
     };
-
     useEffect(() => {
-        initializeEditer();
-    }, []);
+        if (typeof window !== "undefined") {
+            setIsMounted(true);
+        }
+        if (isMounted) {
+            initializeEditer();
+        }
+        return () => {
+            ref.current?.destroy();
+            ref.current = undefined;
+        };
+    }, [isMounted, initializeEditer]);
 
-    const onSubmit = async (quizData: adminTodayQuizSchemeType) => {
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "choices",
+    });
+
+    const onSubmitFunc = async (quizData: adminTodayQuizSchemeType) => {
+        if (data?.user.name === undefined) {
+            console.log("un login");
+            return;
+        }
         const quizObj: EditorJS = JSON.parse(quizText);
         const saveQuizBlock = JSON.stringify(quizObj.blocks);
 
@@ -89,20 +152,29 @@ export default function TabQuizForm({
         }
         const sendData = {
             text: saveQuizBlock,
+            choices: quizData.choices,
             techCategory: quizData.techCategory,
+            showDay: quizData.showDay,
+            userId: "clzo51ihe0008gfj2ken2obvj",
             otherCategory: quizData.otherCategory,
             level: quizData.level,
         };
+        console.log(sendData);
         const res = await axios.post(
             "http://localhost:3001/post/admin-quiz",
             sendData,
         );
         console.log("res", res);
+        if (res.status === 201) {
+            setQuizText("[]");
+            reset();
+        }
     };
+    console.log(errors);
 
     return (
         <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onSubmitFunc)}
             className="w-[100%] bg-[#f8f8f8] pb-20 pt-5"
         >
             <div className="relative m-auto max-w-[1000px] border-b border-gray-200 p-5">
@@ -117,39 +189,25 @@ export default function TabQuizForm({
             <div className="m-auto max-w-[1000px] rounded-md border-b border-gray-200 p-5">
                 <div className="flex">
                     <p className="min-w-[180px]">クイズの予約日</p>
-                    <div className="flex">
-                        <div className="ml-5 border border-[#000238] px-5 py-[5px] text-xs text-[#000238]">
-                            7/21
-                        </div>
-                        <div className="border border-[#000238] px-5 py-[5px] text-xs">
-                            7/22
-                        </div>
-                        <div className="border border-[#000238] px-5 py-[5px] text-xs">
-                            7/23
-                        </div>
-                        <div className="border border-[#000238] px-5 py-[5px] text-xs text-[#000238]">
-                            7/21
-                        </div>
-                        <div className="border border-[#000238] px-5 py-[5px] text-xs">
-                            7/22
-                        </div>
-                        <div className="border border-[#000238] px-5 py-[5px] text-xs">
-                            7/23
-                        </div>
-                        <div className="border border-[#000238] px-5 py-[5px] text-xs">
-                            7/22
-                        </div>
-                        <div className="border border-[#000238] px-5 py-[5px] text-xs">
-                            7/23
-                        </div>
-                        <div className="border border-[#000238] px-5 py-[5px] text-xs">
-                            7/22
-                        </div>
-                        <div className="border border-[#000238] px-5 py-[5px] text-xs">
-                            7/23
-                        </div>
+                    <div className="flex overflow-x-scroll">
+                        {dummyDate.map((date: string, index: number) => (
+                            <div
+                                key={index}
+                                className="ml-5 border border-[#000238] px-5 py-[5px] text-xs text-[#000238]"
+                            >
+                                <input
+                                    type="radio"
+                                    id={date}
+                                    value={date}
+                                    {...register("showDay")}
+                                    className=""
+                                />
+                                <label htmlFor={date}>{date}</label>
+                            </div>
+                        ))}
                     </div>
                 </div>
+                <p className="text-red-300">{errors.showDay?.message}</p>
                 <div className="mt-5 flex">
                     <p className="min-w-[180px]">クイズのレベル</p>
                     <div className="flex">
@@ -210,6 +268,7 @@ export default function TabQuizForm({
                         )}
                     </div>
                 </div>
+                <p className="text-red-300">{errors.techCategory?.message}</p>
                 <div className="mt-5 flex">
                     <p className="min-w-[180px]">クイズのその他のカテゴリ</p>
                     <div className="flex overflow-x-scroll">
@@ -238,8 +297,95 @@ export default function TabQuizForm({
                 </div>
             </div>
             <div id="editor" className="mt-10"></div>
-            <div className="m-auto mt-5 max-w-[800px]">
+            <div className="m-auto max-w-[800px]">
                 <p>選択肢</p>
+                <p className="text-red-300">{errors.choices?.root?.message}</p>
+                {fields.map(
+                    (
+                        field: {
+                            id: string;
+                            text: string;
+                            isTrue: boolean;
+                        },
+                        index: number,
+                    ) => (
+                        <div key={field.id}>
+                            <div>
+                                <label className="text-xs text-gray-400">
+                                    選択肢テキスト
+                                </label>
+                                <Controller
+                                    name={`choices.${index}.text`}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            type="text"
+                                            id={`text${index}`}
+                                        />
+                                    )}
+                                />
+                                {errors.choices?.[index]?.text && (
+                                    <p className="text-red-300">
+                                        {errors.choices[index].text.message}
+                                    </p>
+                                )}
+                            </div>
+                            <div>
+                                <label htmlFor={`true-${index}`}>正解</label>
+                                <Controller
+                                    name={`choices.${index}.isTrue`}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            id={`true-${index}`}
+                                            type="radio"
+                                            value="true"
+                                            checked={field.value === true}
+                                            onChange={() =>
+                                                field.onChange(true)
+                                            }
+                                        />
+                                    )}
+                                />
+                                <label htmlFor={`false-${index}`}>不正解</label>
+                                <Controller
+                                    name={`choices.${index}.isTrue`}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            id={`false-${index}`}
+                                            type="radio"
+                                            value="false"
+                                            checked={field.value === false}
+                                            onChange={() =>
+                                                field.onChange(false)
+                                            }
+                                        />
+                                    )}
+                                />
+                                {fields.length > 2 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => remove(index)}
+                                    >
+                                        選択肢を削除
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    ),
+                )}
+                {fields.length < 6 && (
+                    <button
+                        type="button"
+                        onClick={() => append({ text: "", isTrue: false })}
+                    >
+                        選択肢を追加
+                    </button>
+                )}
             </div>
         </form>
     );
