@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import TabQuizForm from "./(tab-content)/TabQuizForm";
+// import TabQuizForm from "./(tab-content)/TabQuizForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-    AdminTodayQuizScheme,
+    adminTodayQuizScheme,
     adminTodayQuizSchemeType,
 } from "@/app/validations/AdminTodayQuiz";
+import { EditorJSForm } from "@/components/Editor";
 
 export default function Tab() {
     const [viewContent, setViewContent] = useState<string | null>("quiz-form");
@@ -16,15 +17,20 @@ export default function Tab() {
         e.preventDefault();
         setViewContent(e.currentTarget.id);
     };
-    // const [form, setForm] = useState<string>("{}");
-    // console.log("top form", form);
-
     const {
+        control,
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm<adminTodayQuizSchemeType>({
-        resolver: zodResolver(AdminTodayQuizScheme),
+        resolver: zodResolver(adminTodayQuizScheme),
+        defaultValues: {
+            choices: [
+                { text: "", isTrue: false },
+                { text: "", isTrue: false },
+            ],
+        },
     });
     const [quizText, setQuizText] = useState("[]");
     return (
@@ -77,12 +83,14 @@ export default function Tab() {
                 </div>
             </div>
             {viewContent === "quiz-form" && (
-                <TabQuizForm
+                <EditorJSForm
+                    control={control}
                     register={register}
                     handleSubmit={handleSubmit}
                     errors={errors}
                     quizText={quizText}
                     setQuizText={setQuizText}
+                    reset={reset}
                 />
             )}
         </div>
