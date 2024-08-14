@@ -58,6 +58,9 @@
         --chart-5: 340 75% 55%;
     }
 }
+.codex-editor__redactor {
+    padding-bottom: 50px !important;
+}
 /* アクセシビリティ考慮 */
 .visually-hidden {
     position: absolute;
@@ -70,6 +73,9 @@
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
     margin: -1px;
+}
+.ce-header {
+    font-size: 24px;
 }
 .ce-toolbar__content {
     max-width: 800px;

@@ -136,7 +136,7 @@ export default function TabQuizForm({
         control,
         name: "choices",
     });
-
+    console.log(errors);
     const onSubmitFunc = async (quizData: adminTodayQuizSchemeType) => {
         if (data?.user.name === undefined) {
             console.log("un login");
@@ -161,7 +161,7 @@ export default function TabQuizForm({
         };
         console.log(sendData);
         const res = await axios.post(
-            "http://localhost:3001/admin-today-quiz/post",
+            "http://localhost:3001/admin-today-quiz",
             sendData,
         );
         console.log("res", res);
@@ -174,25 +174,40 @@ export default function TabQuizForm({
     return (
         <form
             onSubmit={handleSubmit(onSubmitFunc)}
-            className="w-[100%] bg-[#f8f8f8] pb-20 pt-5"
+            className="w-[100%] bg-[#f8f8f8] pb-60 pt-10"
         >
-            <div className="relative m-auto max-w-[1000px] border-b border-gray-200 p-5">
-                <button
-                    type="submit"
-                    className="block w-fit rounded-md bg-[#000238] px-5 py-[5px] font-bold text-white"
-                >
-                    保存する
-                </button>
+            <div className="relative m-auto flex max-w-[1000px] items-center justify-between border-b border-gray-200 p-5">
+                <p className="text-xl font-bold">今日のクイズを作成</p>
+                <div className="flex">
+                    <button
+                        type="submit"
+                        className="block w-fit rounded-md bg-[#003f88] px-5 py-[5px] font-bold text-white"
+                    >
+                        プレビュー
+                    </button>
+                    <button
+                        type="submit"
+                        className="ml-5 block w-fit rounded-md bg-[#370035] px-5 py-[5px] font-bold text-white"
+                    >
+                        下書き保存
+                    </button>
+                    <button
+                        type="submit"
+                        className="ml-5 block w-fit rounded-md bg-[#000238] px-5 py-[5px] font-bold text-white"
+                    >
+                        公開する
+                    </button>
+                </div>
             </div>
 
             <div className="m-auto max-w-[1000px] rounded-md border-b border-gray-200 p-5">
                 <div className="flex">
-                    <p className="min-w-[180px]">予約日</p>
-                    <div className="flex overflow-x-scroll">
+                    <p className="min-w-[170px]">予約日</p>
+                    <div className="-ml-5 grid grid-cols-5 gap-[10px] overflow-x-scroll">
                         {dummyDate.map((date: string, index: number) => (
                             <div
                                 key={index}
-                                className="ml-5 flex border border-[#000238] px-5 py-[5px] text-xs text-[#000238]"
+                                className="ml-5 flex border border-[#000238] px-[10px] py-[5px] text-xs text-[#000238]"
                             >
                                 <input
                                     type="radio"
@@ -210,8 +225,8 @@ export default function TabQuizForm({
                 </div>
                 <p className="text-red-300">{errors.showDay?.message}</p>
                 <div className="mt-5 flex">
-                    <p className="min-w-[180px]">難易度</p>
-                    <div className="flex">
+                    <p className="min-w-[170px]">難易度</p>
+                    <div className="-ml-5 flex">
                         <input
                             type="radio"
                             id="初級"
@@ -240,18 +255,18 @@ export default function TabQuizForm({
                 </div>
                 <p className="text-red-300">{errors.level?.message}</p>
                 <div className="mt-5 flex">
-                    <p className="min-w-[180px]">技術カテゴリ</p>
-                    <div className="grid grid-cols-4 gap-[10px] overflow-x-scroll">
+                    <p className="min-w-[170px]">技術カテゴリ</p>
+                    <div className="grid grid-cols-5 gap-[10px] overflow-x-scroll">
                         {dummyTechCategory.map(
                             (techCategory: { id: number; name: string }) => (
                                 <label
                                     key={techCategory.id}
                                     htmlFor={techCategory.name}
-                                    className="min-w-[170px] rounded-[5px] border bg-[#ffffff] px-[15px] py-[5px] text-[11px] duration-300 hover:bg-gray-100"
+                                    className="min-w-[130px] rounded-[5px] border bg-[#ffffff] px-[15px] py-[5px] text-[11px] duration-300 hover:bg-gray-100"
                                 >
                                     <label
                                         htmlFor={techCategory.name}
-                                        className="m-auto flex w-fit items-center whitespace-nowrap"
+                                        className="flex w-fit items-center whitespace-nowrap"
                                     >
                                         <input
                                             id={techCategory.name}
@@ -271,16 +286,16 @@ export default function TabQuizForm({
                 </div>
                 <p className="text-red-300">{errors.techCategory?.message}</p>
                 <div className="mt-5 flex">
-                    <p className="min-w-[180px]">その他のカテゴリ</p>
-                    <div className="grid grid-cols-4 gap-[10px] overflow-x-scroll">
+                    <p className="min-w-[170px]">その他のカテゴリ</p>
+                    <div className="grid grid-cols-5 gap-[10px] overflow-x-scroll">
                         {dummyOtherCetegory.map(
                             (otherCategory: { id: number; name: string }) => (
                                 <label
                                     key={otherCategory.id}
                                     htmlFor={otherCategory.name}
-                                    className="min-w-[170px] items-center whitespace-nowrap rounded-[5px] border bg-[#ffffff] px-[15px] py-[5px] text-[11px] duration-300 hover:bg-gray-100"
+                                    className="min-w-[130px] items-center whitespace-nowrap rounded-[5px] border bg-[#ffffff] px-[15px] py-[5px] text-[11px] duration-300 hover:bg-gray-100"
                                 >
-                                    <div className="m-auto flex w-fit items-center whitespace-nowrap">
+                                    <div className="flex w-fit items-center whitespace-nowrap">
                                         <input
                                             id={otherCategory.name}
                                             type="checkbox"
@@ -297,96 +312,124 @@ export default function TabQuizForm({
                     </div>
                 </div>
             </div>
-            <div id="editor" className="mt-10"></div>
+            <div id="editor" className="mt-10 pb-10"></div>
             <div className="m-auto max-w-[800px]">
-                <p>選択肢</p>
+                <div className="flex items-center justify-between">
+                    <p>選択肢</p>
+                    {fields.length < 6 && (
+                        <button
+                            type="button"
+                            onClick={() => append({ text: "", isTrue: false })}
+                            className="block w-fit rounded-md bg-[#000238] px-5 py-[5px] font-bold text-white"
+                        >
+                            選択肢を追加
+                        </button>
+                    )}
+                </div>
+
                 <p className="text-red-300">{errors.choices?.root?.message}</p>
-                {fields.map(
-                    (
-                        field: {
-                            id: string;
-                            text: string;
-                            isTrue: boolean;
-                        },
-                        index: number,
-                    ) => (
-                        <div key={field.id}>
-                            <div>
-                                <label className="text-xs text-gray-400">
-                                    選択肢テキスト
-                                </label>
-                                <Controller
-                                    name={`choices.${index}.text`}
-                                    control={control}
-                                    render={({ field }) => (
-                                        <input
-                                            {...field}
-                                            type="text"
-                                            id={`text${index}`}
-                                        />
+                <p className="text-red-300">{errors.choices?.message}</p>
+                <div className="grid grid-cols-2 gap-5">
+                    {fields.map(
+                        (
+                            field: {
+                                id: string;
+                                text: string;
+                                isTrue: boolean;
+                            },
+                            index: number,
+                        ) => (
+                            <div key={field.id} className="w-full">
+                                <div>
+                                    <label className="text-xs text-gray-400">
+                                        選択肢テキスト
+                                    </label>
+                                    <Controller
+                                        name={`choices.${index}.text`}
+                                        control={control}
+                                        render={({ field }) => (
+                                            <input
+                                                {...field}
+                                                type="text"
+                                                id={`text${index}`}
+                                                className="block w-full rounded-md border border-gray-400 px-5 py-[10px]"
+                                            />
+                                        )}
+                                    />
+                                    {errors.choices?.[index]?.text && (
+                                        <p className="text-red-300">
+                                            {errors.choices[index].text.message}
+                                        </p>
                                     )}
-                                />
-                                {errors.choices?.[index]?.text && (
-                                    <p className="text-red-300">
-                                        {errors.choices[index].text.message}
-                                    </p>
-                                )}
+                                </div>
+                                <div className="mt-1 flex items-center justify-between">
+                                    <div>
+                                        <Controller
+                                            name={`choices.${index}.isTrue`}
+                                            control={control}
+                                            render={({ field }) => (
+                                                <input
+                                                    {...field}
+                                                    id={`true-${index}`}
+                                                    type="radio"
+                                                    value="true"
+                                                    checked={
+                                                        field.value === true
+                                                    }
+                                                    onChange={() =>
+                                                        field.onChange(true)
+                                                    }
+                                                />
+                                            )}
+                                        />
+                                        <label
+                                            className="ml-1"
+                                            htmlFor={`true-${index}`}
+                                        >
+                                            正解
+                                        </label>
+
+                                        <Controller
+                                            name={`choices.${index}.isTrue`}
+                                            control={control}
+                                            render={({ field }) => (
+                                                <input
+                                                    {...field}
+                                                    id={`false-${index}`}
+                                                    type="radio"
+                                                    value="false"
+                                                    checked={
+                                                        field.value === false
+                                                    }
+                                                    onChange={() =>
+                                                        field.onChange(false)
+                                                    }
+                                                    className="ml-5"
+                                                />
+                                            )}
+                                        />
+                                        <label
+                                            className="ml-1"
+                                            htmlFor={`false-${index}`}
+                                        >
+                                            不正解
+                                        </label>
+                                    </div>
+
+                                    {fields.length > 2 && (
+                                        <button
+                                            className="text-xs text-blue-300"
+                                            type="button"
+                                            onClick={() => remove(index)}
+                                        >
+                                            選択肢を削除
+                                        </button>
+                                    )}
+                                </div>
                             </div>
-                            <div>
-                                <label htmlFor={`true-${index}`}>正解</label>
-                                <Controller
-                                    name={`choices.${index}.isTrue`}
-                                    control={control}
-                                    render={({ field }) => (
-                                        <input
-                                            {...field}
-                                            id={`true-${index}`}
-                                            type="radio"
-                                            value="true"
-                                            checked={field.value === true}
-                                            onChange={() =>
-                                                field.onChange(true)
-                                            }
-                                        />
-                                    )}
-                                />
-                                <label htmlFor={`false-${index}`}>不正解</label>
-                                <Controller
-                                    name={`choices.${index}.isTrue`}
-                                    control={control}
-                                    render={({ field }) => (
-                                        <input
-                                            {...field}
-                                            id={`false-${index}`}
-                                            type="radio"
-                                            value="false"
-                                            checked={field.value === false}
-                                            onChange={() =>
-                                                field.onChange(false)
-                                            }
-                                        />
-                                    )}
-                                />
-                                {fields.length > 2 && (
-                                    <button
-                                        type="button"
-                                        onClick={() => remove(index)}
-                                    >
-                                        選択肢を削除
-                                    </button>
-                                )}
-                            </div>
-                        </div>
-                    ),
-                )}
-                {fields.length < 6 && (
-                    <button
-                        type="button"
-                        onClick={() => append({ text: "", isTrue: false })}
-                    >
-                        選択肢を追加
-                    </button>
-                )}
+                        ),
+                    )}
+                </div>
             </div>
         </form>
     );

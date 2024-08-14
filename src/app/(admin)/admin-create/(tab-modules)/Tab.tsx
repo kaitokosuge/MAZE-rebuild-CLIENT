@@ -37,7 +37,7 @@ export default function Tab() {
     const [quizText, setQuizText] = useState("[]");
     return (
         <div className="-ml-5">
-            <div className="border-maze-right flex h-[50px] items-center justify-between border-b px-10 py-[10px] pr-20">
+            {/* <div className="border-maze-right flex h-[50px] items-center justify-between border-b px-10 py-[10px] pr-20">
                 <div className="flex">
                     <button
                         id="quiz-data"
@@ -83,7 +83,7 @@ export default function Tab() {
                         通常クイズの作成
                     </button>
                 </div>
-            </div>
+            </div> */}
             {viewContent === "today-quiz-form" && (
                 <EditorJSForm
                     control={control}
