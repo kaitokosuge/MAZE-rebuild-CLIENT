@@ -187,12 +187,12 @@ export default function TabQuizForm({
 
             <div className="m-auto max-w-[1000px] rounded-md border-b border-gray-200 p-5">
                 <div className="flex">
-                    <p className="min-w-[180px]">クイズの予約日</p>
+                    <p className="min-w-[180px]">予約日</p>
                     <div className="flex overflow-x-scroll">
                         {dummyDate.map((date: string, index: number) => (
                             <div
                                 key={index}
-                                className="ml-5 border border-[#000238] px-5 py-[5px] text-xs text-[#000238]"
+                                className="ml-5 flex border border-[#000238] px-5 py-[5px] text-xs text-[#000238]"
                             >
                                 <input
                                     type="radio"
@@ -201,14 +201,16 @@ export default function TabQuizForm({
                                     {...register("showDay")}
                                     className=""
                                 />
-                                <label htmlFor={date}>{date}</label>
+                                <label htmlFor={date} className="ml-1">
+                                    {date}
+                                </label>
                             </div>
                         ))}
                     </div>
                 </div>
                 <p className="text-red-300">{errors.showDay?.message}</p>
                 <div className="mt-5 flex">
-                    <p className="min-w-[180px]">クイズのレベル</p>
+                    <p className="min-w-[180px]">難易度</p>
                     <div className="flex">
                         <input
                             type="radio"
@@ -238,14 +240,14 @@ export default function TabQuizForm({
                 </div>
                 <p className="text-red-300">{errors.level?.message}</p>
                 <div className="mt-5 flex">
-                    <p className="min-w-[180px]">クイズの技術カテゴリ</p>
-                    <div className="flex overflow-x-scroll">
+                    <p className="min-w-[180px]">技術カテゴリ</p>
+                    <div className="grid grid-cols-4 gap-[10px] overflow-x-scroll">
                         {dummyTechCategory.map(
                             (techCategory: { id: number; name: string }) => (
                                 <label
                                     key={techCategory.id}
                                     htmlFor={techCategory.name}
-                                    className="ml-5 min-w-[170px] rounded-[5px] border bg-[#ffffff] px-[15px] py-[5px] duration-300 hover:bg-gray-100"
+                                    className="min-w-[170px] rounded-[5px] border bg-[#ffffff] px-[15px] py-[5px] text-[11px] duration-300 hover:bg-gray-100"
                                 >
                                     <label
                                         htmlFor={techCategory.name}
@@ -258,7 +260,7 @@ export default function TabQuizForm({
                                             {...register("techCategory")}
                                         />
 
-                                        <p className="text-maze-right ml-[10px] text-[14px] font-bold">
+                                        <p className="text-maze-right ml-[10px] font-bold">
                                             {techCategory.name}
                                         </p>
                                     </label>
@@ -269,14 +271,14 @@ export default function TabQuizForm({
                 </div>
                 <p className="text-red-300">{errors.techCategory?.message}</p>
                 <div className="mt-5 flex">
-                    <p className="min-w-[180px]">クイズのその他のカテゴリ</p>
-                    <div className="flex overflow-x-scroll">
+                    <p className="min-w-[180px]">その他のカテゴリ</p>
+                    <div className="grid grid-cols-4 gap-[10px] overflow-x-scroll">
                         {dummyOtherCetegory.map(
                             (otherCategory: { id: number; name: string }) => (
                                 <label
                                     key={otherCategory.id}
                                     htmlFor={otherCategory.name}
-                                    className="ml-5 min-w-[170px] items-center whitespace-nowrap rounded-[5px] border bg-[#ffffff] px-[15px] py-[5px] duration-300 hover:bg-gray-100"
+                                    className="min-w-[170px] items-center whitespace-nowrap rounded-[5px] border bg-[#ffffff] px-[15px] py-[5px] text-[11px] duration-300 hover:bg-gray-100"
                                 >
                                     <div className="m-auto flex w-fit items-center whitespace-nowrap">
                                         <input
@@ -285,7 +287,7 @@ export default function TabQuizForm({
                                             value={otherCategory.id}
                                             {...register("otherCategory")}
                                         />
-                                        <p className="text-maze-right ml-[10px] text-[14px] font-bold">
+                                        <p className="text-maze-right ml-[10px] font-bold">
                                             {otherCategory.name}
                                         </p>
                                     </div>

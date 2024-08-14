@@ -23,6 +23,10 @@ export const dummyTechCategory = [
         id: 6,
         name: "Ruby on Rails",
     },
+    {
+        id: 7,
+        name: "Django",
+    },
 ];
 
 export const dummyOtherCetegory = [

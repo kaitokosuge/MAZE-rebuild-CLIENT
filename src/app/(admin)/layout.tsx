@@ -4,7 +4,6 @@ export const metadata = {
 };
 
 import "../../styles/globals.css";
-import AdminHeader from "@/components/Admin/AdminHeader";
 
 export default function RootLayout({
     children,

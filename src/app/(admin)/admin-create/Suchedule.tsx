@@ -12,7 +12,9 @@ export default function Suchedule() {
         <>
             <div className="border-maze-right flex h-[50px] items-center justify-between border-b px-5 py-[2px] pr-20 font-bold">
                 <div className="flex items-center">
-                    <button onClick={handleShowSuchedule}>QuizSuchedule</button>
+                    <button onClick={handleShowSuchedule}>
+                        今日のクイズの予定
+                    </button>
                     <img
                         src="./app-icons/under-arrow.svg"
                         className={
