@@ -161,7 +161,7 @@ export default function TabQuizForm({
         };
         console.log(sendData);
         const res = await axios.post(
-            "http://localhost:3001/post/admin-quiz",
+            "http://localhost:3001/admin-today-quiz/post",
             sendData,
         );
         console.log("res", res);
@@ -170,7 +170,6 @@ export default function TabQuizForm({
             reset();
         }
     };
-    console.log(errors);
 
     return (
         <form
