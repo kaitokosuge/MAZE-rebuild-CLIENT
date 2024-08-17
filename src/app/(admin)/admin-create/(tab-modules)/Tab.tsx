@@ -10,7 +10,9 @@ import {
 import { EditorJSForm } from "@/components/Editor";
 
 export default function Tab() {
-    const [viewContent, setViewContent] = useState<string | null>("quiz-form");
+    const [viewContent, setViewContent] = useState<string | null>(
+        "today-quiz-form",
+    );
     const handleClickTabMenu = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     ) => {
@@ -35,7 +37,7 @@ export default function Tab() {
     const [quizText, setQuizText] = useState("[]");
     return (
         <div className="-ml-5">
-            <div className="border-maze-right flex h-[50px] items-center justify-between border-b px-10 py-[10px] pr-20">
+            {/* <div className="border-maze-right flex h-[50px] items-center justify-between border-b px-10 py-[10px] pr-20">
                 <div className="flex">
                     <button
                         id="quiz-data"
@@ -67,22 +69,22 @@ export default function Tab() {
             <div className="border-maze-right flex h-[50px] items-center justify-between border-b px-10 py-[10px] pr-20">
                 <div className="flex">
                     <button
-                        id="quiz-data"
+                        id="today-quiz-form"
                         className="font-bold"
                         onClick={handleClickTabMenu}
                     >
                         「今日の一問」の作成
                     </button>
                     <button
-                        id="quiz-form"
+                        id="normal-quiz-form"
                         className="ml-5 font-bold opacity-30"
                         onClick={handleClickTabMenu}
                     >
                         通常クイズの作成
                     </button>
                 </div>
-            </div>
-            {viewContent === "quiz-form" && (
+            </div> */}
+            {viewContent === "today-quiz-form" && (
                 <EditorJSForm
                     control={control}
                     register={register}
@@ -93,6 +95,7 @@ export default function Tab() {
                     reset={reset}
                 />
             )}
+            {viewContent === "normal-quiz-form" && <p>norml</p>}
         </div>
     );
 }

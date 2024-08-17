@@ -8,8 +8,8 @@ const choiceScheme = z.object({
 export const adminTodayQuizScheme = z.object({
     choices: z
         .array(choiceScheme)
-        .min(2, "選択肢は少なくとも2つ用意してください。")
-        .max(6, "選択肢は最大6つまでです。")
+        .min(2, { message: "選択肢は少なくとも2つ用意してください。" })
+        .max(6, { message: "選択肢は最大6つまでです。" })
         .refine((choices) => choices.some((choice) => choice.isTrue), {
             message: "選択肢内に「正解」のものを一つ以上は用意してください",
         }),

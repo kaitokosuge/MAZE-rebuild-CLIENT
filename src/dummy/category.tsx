@@ -23,6 +23,10 @@ export const dummyTechCategory = [
         id: 6,
         name: "Ruby on Rails",
     },
+    {
+        id: 7,
+        name: "Django",
+    },
 ];
 
 export const dummyOtherCetegory = [
@@ -45,5 +49,4 @@ export const dummyDate = [
     "2024/08/15",
     "2024/08/16",
     "2024/08/17",
-    "2024/08/18",
 ];

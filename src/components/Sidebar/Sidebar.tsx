@@ -83,9 +83,9 @@ export default function Sidebar() {
                             className={
                                 isHover
                                     ? isOpenLevel
-                                        ? "absolute right-2 h-[15px] w-[15px] rotate-180 duration-300"
-                                        : "absolute right-2 h-[15px] w-[15px] duration-300"
-                                    : "absolute right-2 h-[15px] w-[15px] opacity-0 duration-100"
+                                        ? "absolute right-2 h-[10px] w-[10px] rotate-180 duration-300"
+                                        : "absolute right-2 h-[10px] w-[10px] duration-300"
+                                    : "absolute right-2 h-[10px] w-[10px] opacity-0 duration-100"
                             }
                         />
                     </div>
@@ -124,15 +124,15 @@ export default function Sidebar() {
                             className={
                                 isHover
                                     ? isOpenTech
-                                        ? "absolute right-2 h-[15px] w-[15px] rotate-180 duration-300"
-                                        : "absolute right-2 h-[15px] w-[15px] duration-300"
-                                    : "absolute right-2 h-[15px] w-[15px] opacity-0 duration-100"
+                                        ? "absolute right-2 h-[10px] w-[10px] rotate-180 duration-300"
+                                        : "absolute right-2 h-[10px] w-[10px] duration-300"
+                                    : "absolute right-2 h-[10px] w-[10px] opacity-0 duration-100"
                             }
                         />
                     </div>
                 </div>
                 {isOpenTech && (
-                    <div className="relative -z-20 w-full duration-500">
+                    <div className="relative -z-20 w-full border-l duration-500">
                         <Link
                             href="/tech/typescript"
                             className="flex items-center whitespace-nowrap rounded-[5px] bg-white px-[15px] py-[12px] duration-300 hover:bg-gray-100"
@@ -161,15 +161,15 @@ export default function Sidebar() {
                             className={
                                 isHover
                                     ? isOpenOthers
-                                        ? "absolute right-2 h-[15px] w-[15px] rotate-180 duration-300"
-                                        : "absolute right-2 h-[15px] w-[15px] duration-300"
-                                    : "absolute right-2 h-[15px] w-[15px] opacity-0 duration-100"
+                                        ? "absolute right-2 h-[10px] w-[10px] rotate-180 duration-300"
+                                        : "absolute right-2 h-[10px] w-[10px] duration-300"
+                                    : "absolute right-2 h-[10px] w-[10px] opacity-0 duration-100"
                             }
                         />
                     </div>
                 </div>
                 {isOpenOthers && (
-                    <div className="relative -z-30 w-full duration-500">
+                    <div className="relative -z-30 w-full border-l duration-500">
                         <Link
                             href="/tech/typescript"
                             className="flex items-center whitespace-nowrap rounded-[5px] px-[15px] py-[12px] duration-300 hover:bg-gray-100"
