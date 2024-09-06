@@ -5,7 +5,13 @@
         // "plugin:@typescript-eslint/recommended",
         // "plugin:react-hooks/recommended"
     ],
-
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
     "rules": {
         "react/no-unescaped-entities": "off",
         "@next/next/no-page-custom-font": "off"
