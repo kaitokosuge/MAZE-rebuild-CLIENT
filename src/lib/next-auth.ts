@@ -21,13 +21,24 @@ export const authOptions: NextAuthOptions = {
     pages: {
         signIn: "/login",
     },
+
     callbacks: {
+        async jwt({ token, user, account }) {
+            if (user && account) {
+                token.role = user.role;
+                token.accessToken = account.access_token;
+            }
+
+            return token;
+        },
         async session({ token, session }) {
             if (token) {
+                session.user.accessToken = token.accessToken;
                 session.user.id = token.id;
                 session.user.name = token.name;
                 session.user.email = token.email;
                 session.user.image = token.picture;
+                session.user.role = token.role;
             }
             return session;
         },

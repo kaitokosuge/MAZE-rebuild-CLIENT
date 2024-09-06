@@ -15,14 +15,14 @@ import {
     UseFormRegister,
     UseFormReset,
 } from "react-hook-form";
-import { adminTodayQuizSchemeType } from "@/app/validations/AdminTodayQuiz";
+
 import { validateQuizText } from "@/app/validations/CommonQuizText";
 import {
     dummyDate,
     dummyOtherCetegory,
     dummyTechCategory,
 } from "@/dummy/category";
-import { useSession } from "next-auth/react";
+import { todayQuizSchemeType } from "@/features/todayQuizPost/validations/todayQuiz";
 
 export default function TabQuizForm({
     control,
@@ -91,9 +91,6 @@ export default function TabQuizForm({
         otherCategory?: string[] | undefined;
     }>;
 }) {
-    const { data } = useSession();
-    console.log("user name", data?.user.name);
-
     const ref = useRef<EditorJS>();
     const [isMounted, setIsMounted] = useState<boolean>(false);
     const initializeEditer = useCallback(async () => {
@@ -137,11 +134,8 @@ export default function TabQuizForm({
         name: "choices",
     });
     console.log(errors);
-    const onSubmitFunc = async (quizData: adminTodayQuizSchemeType) => {
-        if (data?.user.name === undefined) {
-            console.log("un login");
-            return;
-        }
+
+    const onSubmitFunc = async (quizData: todayQuizSchemeType) => {
         const quizObj: EditorJS = JSON.parse(quizText);
         const saveQuizBlock = JSON.stringify(quizObj.blocks);
 
@@ -159,6 +153,7 @@ export default function TabQuizForm({
             otherCategory: quizData.otherCategory,
             level: quizData.level,
         };
+
         console.log(sendData);
         const res = await axios.post(
             "http://localhost:3001/admin-today-quiz",

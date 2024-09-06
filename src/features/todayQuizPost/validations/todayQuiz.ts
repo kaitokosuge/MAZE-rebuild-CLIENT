@@ -5,7 +5,7 @@ const choiceScheme = z.object({
     isTrue: z.boolean(),
 });
 
-export const adminTodayQuizScheme = z.object({
+export const todayQuizScheme = z.object({
     choices: z
         .array(choiceScheme)
         .min(2, { message: "選択肢は少なくとも2つ用意してください。" })
@@ -20,4 +20,4 @@ export const adminTodayQuizScheme = z.object({
     level: z.string({ message: "入力必須項目です" }),
 });
 
-export type adminTodayQuizSchemeType = z.infer<typeof adminTodayQuizScheme>;
+export type todayQuizSchemeType = z.infer<typeof todayQuizScheme>;
