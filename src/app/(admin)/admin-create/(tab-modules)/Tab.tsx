@@ -3,30 +3,22 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 // import TabQuizForm from "./(tab-content)/TabQuizForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-    adminTodayQuizScheme,
-    adminTodayQuizSchemeType,
-} from "@/app/validations/AdminTodayQuiz";
+
 import { EditorJSForm } from "@/components/Editor";
+import {
+    todayQuizScheme,
+    todayQuizSchemeType,
+} from "@/features/todayQuizPost/validations/todayQuiz";
 
 export default function Tab() {
-    const [viewContent, setViewContent] = useState<string | null>(
-        "today-quiz-form",
-    );
-    const handleClickTabMenu = (
-        e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    ) => {
-        e.preventDefault();
-        setViewContent(e.currentTarget.id);
-    };
     const {
         control,
         register,
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm<adminTodayQuizSchemeType>({
-        resolver: zodResolver(adminTodayQuizScheme),
+    } = useForm<todayQuizSchemeType>({
+        resolver: zodResolver(todayQuizScheme),
         defaultValues: {
             choices: [
                 { text: "", isTrue: false },
@@ -84,18 +76,16 @@ export default function Tab() {
                     </button>
                 </div>
             </div> */}
-            {viewContent === "today-quiz-form" && (
-                <EditorJSForm
-                    control={control}
-                    register={register}
-                    handleSubmit={handleSubmit}
-                    errors={errors}
-                    quizText={quizText}
-                    setQuizText={setQuizText}
-                    reset={reset}
-                />
-            )}
-            {viewContent === "normal-quiz-form" && <p>norml</p>}
+
+            <EditorJSForm
+                control={control}
+                register={register}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                quizText={quizText}
+                setQuizText={setQuizText}
+                reset={reset}
+            />
         </div>
     );
 }

@@ -7,6 +7,14 @@ export default withAuth(
         const token = await getToken({ req });
 
         const isAuth = !!token;
+        const isAdmin = token?.role;
+        // const numIsAdmin = Number(isAdmin);
+        console.log("isadmin", isAdmin);
+        if (isAdmin === null) {
+            console.log("hello admin");
+            return NextResponse.rewrite(new URL("/404", req.url));
+        }
+
         console.log("token", token);
         //ログイン・新規登録ページかどうか
         const isAuthPage =
@@ -34,5 +42,11 @@ export default withAuth(
     },
 );
 export const config = {
-    matcher: ["/dashboard/:path", "/login", "/register"],
+    matcher: [
+        "/dashboard/:path",
+        "/login",
+        "/register",
+        "/test",
+        "/admin-today-quiz",
+    ],
 };
