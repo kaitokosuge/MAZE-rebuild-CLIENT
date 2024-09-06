@@ -1,5 +1,13 @@
 "use client";
-import TodayQuizPost from "@/features/todayQuizPost/TodayQuizPost";
+import dynamic from "next/dynamic";
+
+// ダイナミックインポートの設定
+const TodayQuizPost = dynamic(
+    () => import("@/features/todayQuizPost/TodayQuizPost"),
+    {
+        ssr: false, // サーバーサイドレンダリングを無効にする場合（必要に応じて）
+    },
+);
 import { SessionProvider } from "next-auth/react";
 import React from "react";
 

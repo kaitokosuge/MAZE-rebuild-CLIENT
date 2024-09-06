@@ -22,4 +22,4 @@ if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 //     prisma = global.cachePrisma;
 // }
 
-// export const db = prisma;
+export const db = prisma;
